@@ -1,0 +1,30 @@
+<meta charset="utf-8">
+
+<script>
+
+	function pulaLinha() {
+		document.write("<br><hr>")
+	}
+
+	function mostrar(frase) {
+
+		document.write(frase)
+		pulaLinha()
+	}
+
+
+	var divisor = parseInt(prompt("De quantos núemros você quer tirar a média?"))
+
+	var somaNumeros = 0
+
+	for (i = 1; i <= divisor; i++) {
+
+		var soma = parseInt(prompt("Digite o " + i + "o número."))
+		somaNumeros = somaNumeros + soma
+	}
+
+	mostrar(somaNumeros / divisor)
+
+</script>
+
+Me siga no <a href="https://twitter.com/dedezaumm">Twitter</a>

@@ -1,0 +1,88 @@
+<meta charset="utf-8">
+
+<script>
+	
+	function pulaLinha() {
+
+		document.write("<br>")
+	}
+
+	function mostrar(frase) {
+
+		document.write(frase)
+		pulaLinha()
+	}
+
+
+	function sorteia(n){
+
+		var sorteio = []
+
+		var contador = 0
+
+		while(contador<perguntasorteio){
+
+			var numero = Math.round(Math.random() * n)
+			var achou = false
+
+			for(var i=0; i<sorteio.length; i++){
+
+				if(numero==sorteio[i]){
+					achou=true
+					break
+				}
+			}
+
+			if(achou==false){
+				sorteio.push(numero)
+				contador++
+
+			}
+
+		}
+
+		return sorteio
+
+	}
+
+	var perguntaN = parseInt(prompt("Vamos jogar! Digite um número de 3 digitos."))
+	var perguntasorteio = parseInt(prompt("Certo! agora digite um número de 1 dígito."))
+
+	var numeroSorteado = sorteia(perguntaN)
+	console.log(numeroSorteado)
+
+	var vidas = 3
+
+	alert((perguntasorteio + " números foram sorteados entre 0 e " + perguntaN + ". Você tem " + vidas + " chances para tentar adivinha-los, boa sorte."))
+
+	while(vidas>0){
+
+		
+
+			var chute = parseInt(prompt("Você tem " + vidas + " vidas. Digite seu chute."))
+
+			if (chute>perguntaN){
+					alert("Chute um múmero entre 0 e " + perguntaN + ".")
+			}
+
+			if (chute == numeroSorteado[i]){
+				alert("MEU DEUS, VOCÊ ACERTOU!")
+				break
+			} 
+				
+			if (chute !== numeroSorteado[i]) {
+				alert("Você errou.")
+				vidas--
+				;
+			}	
+
+
+			if (vidas == 0){
+				alert("Fim do jogo. Os números eram " + numeroSorteado)
+				break
+
+		   	}
+        }
+	
+</script>
+

@@ -1,0 +1,124 @@
+<canvas width="600" height="400"></canvas>
+
+<br>
+<br>
+
+Escolha uma cor  <input type="color" id="cor">
+
+<br>
+<br>
+
+<button id="lapis">Lapis</button>
+<button id="borracha">borracha</button>
+
+<script>
+	
+	var tela = document.querySelector("canvas")
+	var pincel = tela.getContext("2d")
+	var cor = document.querySelector("#cor")
+	var botaoLapis = document.querySelector("#lapis")
+	var botaoBorracha = document.querySelector("#borracha")
+
+	pincel.fillStyle = 'grey'
+	pincel.fillRect(0,0,600,400)
+
+	function desenhar() {
+	
+		var raio = 10
+		var i = 0
+		var desenha = false
+
+		function lapis(evento){
+
+			console.log(evento)
+
+			if(desenha==true){
+
+				var x = evento.pageX - tela.offsetLeft
+				var y = evento.pageY - tela.offsetTop
+
+				if(evento.shiftKey == true && raio<40){
+					raio = raio + 0.15
+				}
+
+				if(evento.altKey == true && raio>10){
+					raio = raio - 0.15
+				}
+
+				pincel.fillStyle = cor.value
+				pincel.beginPath()
+				pincel.arc(x,y,raio,0,2*Math.PI)
+				pincel.fill()
+			}
+		}
+
+		tela.onmousemove = lapis
+
+		function desenhar(){
+
+			desenha=true
+		}
+
+		function pararDesenhar(){
+
+			desenha=false
+		}
+
+		tela.onmousedown = desenhar
+		tela.onmouseup = pararDesenhar
+	}
+
+
+
+	function apagar(){
+
+		var raio = 10
+
+		var i = 0
+
+		var desenha = false
+
+		function lapis(evento){
+
+			console.log(evento)
+
+			if(desenha==true){
+
+				var x = evento.pageX - tela.offsetLeft
+				var y = evento.pageY - tela.offsetTop
+
+
+				if(evento.shiftKey == true && raio<40){
+					raio = raio + 0.15
+				}
+
+				if(evento.altKey == true && raio>10){
+					raio = raio - 0.15
+				}
+
+				pincel.fillStyle = 'grey'
+				pincel.beginPath()
+				pincel.arc(x,y,raio,0,2*Math.PI)
+				pincel.fill()
+			}
+		}
+
+		tela.onmousemove = lapis
+
+		function desenhar(){
+
+			desenha=true
+		}
+
+		function pararDesenhar(){
+
+			desenha=false
+		}
+
+		tela.onmousedown = desenhar
+		tela.onmouseup = pararDesenhar
+	}
+
+	botaoLapis.onclick = desenhar
+	botaoBorracha.onclick = apagar		
+</script>

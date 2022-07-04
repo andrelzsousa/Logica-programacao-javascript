@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+
+<script>
+	
+	function pulaLinha() {
+
+	document.write("<br>")
+
+	}
+
+	function mostrar(frase) {
+
+		document.write(frase)
+		pulaLinha()
+	}
+
+	function calculaImc(altura, peso){
+
+		var imc = peso / (altura*altura)
+
+		return imc
+	}
+
+	var nome = prompt("qual o seu nome?")
+ 	var alturaInformada = parseFloat(prompt("altura?"))
+ 	var pesoInformado = parseFloat(prompt("peso?"))
+
+    var imcCalculado = calculaImc(alturaInformada, pesoInformado)
+
+    mostrar(nome + ", seu IMC está em " + imcCalculado)
+
+    if (imcCalculado < 18.5) {
+
+    	mostrar("Você esta abaixo do peso, pois seu imc encontra-se abaixo de 18,5")
+    }
+
+    if (imcCalculado >= 18.5 && imcCalculado <= 24.9) {
+
+    	mostrar("Você esta com o peso nomral, pois seu imc encontra-se entre 18,5 e 24,9")
+    }
+
+    if (imcCalculado > 24.9) {
+
+    	mostrar("Você esta acima do peso, pois seu imc encontra-se acima de 24,9")
+    }
+   
+
+</script>

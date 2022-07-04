@@ -1,0 +1,213 @@
+<canvas width="600" height="400" style=" position: relative; left: 30%; top: 18%;"></canvas>
+
+<script>
+	
+	var tela = document.querySelector("canvas")
+	var pincel = tela.getContext("2d")
+
+
+	var esquerda = 37
+    var cima = 38
+    var direita = 39
+    var baixo = 40
+
+	var taxaLeft;
+    var taxaUp;
+	var taxaDown;
+	var taxaRight;
+
+	var sentidoUp= 2
+    var sentidoDown= -1
+
+    var yAzuisUp = 20
+    var yAzuisDown = 380
+
+	var yAzul = 20
+    
+	var xAmarelo = 40
+	var yAmarelo = 200
+
+	var raioAzul = 10
+
+	function desenhaCirculoAzul (x, y, raio){
+
+		pincel.fillStyle = 'blue'
+		pincel.beginPath()
+		pincel.arc(x,y,raio,0,2*Math.PI)
+		pincel.fill()
+	}
+
+
+	function desenhaQuadradoAmarelo (x, y){
+
+		pincel.fillStyle = 'yellow'
+		pincel.beginPath()
+		pincel.fillRect(x,y,16,16)
+		pincel.fill()
+	}
+
+
+	function limpaTela(){
+
+		pincel.clearRect(0,0,600,400)
+	}
+
+	function AtualizaTela() {
+
+		limpaTela()
+		pincel.strokeRect(0,0,600,400)
+
+		desenhaQuadradoAmarelo(xAmarelo,yAmarelo)
+
+        
+        yAzuisUp = yAzuisUp + sentidoUp
+
+        if (yAzuisUp > 380){
+            sentidoUp = -2
+        }else if(yAzuisUp < 20)
+            sentidoUp = 2
+
+        
+        yAzuisDown = yAzuisDown + sentidoDown
+
+        if (yAzuisDown < 20){
+            sentidoDown = 1
+        }else if(yAzuisDown > 380){
+            sentidoDown = -1
+        }
+
+		var xAzuisUp = [80, 160, 240, 320, 400]
+        var xAzuisDown = [120, 200, 280, 360, 440]
+
+		for(var i = 0; i < xAzuisUp.length; i++){
+
+			desenhaCirculoAzul(xAzuisUp[i], yAzuisUp, raioAzul)
+			colisao(xAzuisUp[i], yAzuisUp)
+		}
+
+        for(var i = 0; i < xAzuisUp.length; i++){
+
+			desenhaCirculoAzul(xAzuisDown[i], yAzuisDown, raioAzul)
+			colisao(xAzuisDown[i], yAzuisDown)
+		}
+
+		pincel.fillStyle = 'red'
+		pincel.fillRect(500, 150, 100,100)
+		
+		vencer()
+		colisaoParede()		
+
+	}
+	var intervalo = setInterval(AtualizaTela, 1)
+
+
+	function colisao(xAzul, yAzul){
+
+		if((xAmarelo >= xAzul - (raioAzul-1) && xAmarelo <= xAzul + (raioAzul-1) && yAmarelo >= yAzul - (raioAzul-1) && yAmarelo <= yAzul + (raioAzul-1))){
+			clearInterval(intervalo)
+			setTimeout(fim, 500)
+			
+		}
+		if((xAmarelo + 16 >= xAzul - (raioAzul-1) && xAmarelo + 16 <= xAzul + (raioAzul-1) && yAmarelo >= yAzul - (raioAzul-1) && yAmarelo <= yAzul + (raioAzul-1))){
+			clearInterval(intervalo)
+			setTimeout(fim, 500)
+		}
+		if((xAmarelo >= xAzul - (raioAzul-1) && xAmarelo <= xAzul + (raioAzul-1) && yAmarelo + 16 >= yAzul - (raioAzul-1) && yAmarelo + 16 <= yAzul + (raioAzul-1))){
+			clearInterval(intervalo)
+			setTimeout(fim, 500)
+		}
+		if((xAmarelo + 16 >= xAzul - (raioAzul-1) && xAmarelo + 16 <= xAzul + (raioAzul-1) && yAmarelo + 16 >= yAzul - (raioAzul-1) && yAmarelo + 16 <= yAzul + (raioAzul-1))){
+			clearInterval(intervalo)
+			setTimeout(fim, 500)
+		}
+	}
+
+	function colisaoParede(){
+
+		if(yAmarelo <= 0){
+			taxaUp = 0
+		}
+		else{
+			taxaUp = 5
+		}
+
+		if(yAmarelo + 16 >= 400){
+			taxaDown = 0
+		}
+		else{
+			taxaDown = 5
+		}
+
+		if(xAmarelo <= 0){
+			taxaLeft = 0
+		}
+		else{
+			taxaLeft = 5
+		}
+
+		if(xAmarelo + 16 >= 600){
+			taxaRight = 0
+		}
+		else{
+			taxaRight = 5
+		}
+	}
+
+	function leDoTeclado(evento){
+
+		if(evento.keyCode == esquerda){
+			xAmarelo = xAmarelo - taxaLeft
+		}
+		if(evento.keyCode == cima){
+			yAmarelo = yAmarelo - taxaUp
+		}
+		if(evento.keyCode == direita){
+			xAmarelo = xAmarelo + taxaRight
+		}
+		if(evento.keyCode == baixo){
+			yAmarelo = yAmarelo + taxaDown
+		}
+	}
+
+	function fim(){
+		document.write("Você foi atingido. Fim do jogo.<br><br><button><a href='hardest_game.html'>Tentar novamente</a></button>")
+	}
+
+	function vencer(){
+		if(xAmarelo + 8 >= 500 && yAmarelo + 8 >= 150 && yAmarelo + 8 <= 250){
+			document.write("venceu.<br><br><button><a href='hardest_game.html'>Tentar novamente</a></button>")
+			clearInterval(intervalo)
+		}
+	}
+
+	document.onkeydown = leDoTeclado
+
+		/*
+		xAzulUm=100
+		xAzulDois=160
+		xAzulTres=220
+		xAzulQuatro=280
+		xAzulCinco=340
+		xAzulSeis=400
+		xAzulSete=460
+
+		desenhaCirculoAzul(xAzulUm, yAzul, raioAzul)
+		desenhaCirculoAzul(xAzulDois, yAzul, raioAzul)
+		desenhaCirculoAzul(xAzulTres, yAzul, raioAzul)
+		desenhaCirculoAzul(xAzulQuatro, yAzul, raioAzul)
+		desenhaCirculoAzul(xAzulCinco, yAzul, raioAzul)
+		desenhaCirculoAzul(xAzulSeis, yAzul, raioAzul)
+		desenhaCirculoAzul(xAzulSete, yAzul, raioAzul)
+		
+		colisao(xAzulUm, yAzul)
+		colisao(xAzulDois, yAzul)
+		colisao(xAzulTres, yAzul)
+		colisao(xAzulQuatro, yAzul)
+		colisao(xAzulCinco, yAzul)
+		colisao(xAzulSeis, yAzul)
+		colisao(xAzulSete, yAzul)
+		*/	
+
+
+
+</script>

@@ -1,0 +1,42 @@
+<meta charset="utf-8">
+
+<script>
+	
+	function pulaLinha() {
+
+		document.write("<br>")
+	}
+
+	function mostrar(frase) {
+
+		document.write(frase)
+		pulaLinha()
+	}
+
+	function sortear(n){
+
+		var sorteio = Math.round(Math.random() * n)
+		return sorteio
+	}
+
+	var numeroSorteado = sortear(10)
+
+	alert("Vamos jogar! Você tem UMA chance para adivinhar um número de 0 a 10.")
+
+	var chute = parseInt(prompt("Chute seu número."))
+
+	if (numeroSorteado == chute){
+		alert("acertou fdp")
+	}
+
+	else{
+		alert("errou burro do caralho")
+		alert("idiota")
+		alert("seu merda")
+		alert("estupido")
+		alert("horroroso")
+		alert("te fode")
+
+	}
+
+</script>

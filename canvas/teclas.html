@@ -1,0 +1,79 @@
+<meta charset="utf-8">
+
+<canvas width="1200" height="800"></canvas>
+
+<script>
+
+	var tela = document.querySelector("canvas")
+	var pincel = tela.getContext("2d")
+
+	var x = 20
+	var y = 20
+
+	var esquerdaCod = 37
+    var cimaCod = 38
+    var direitaCod = 39
+    var baixoCod = 40
+
+	var esquerda = false
+	var cima = false
+	var direita = false
+	var baixo = false
+
+    var taxa = 2;
+
+	function desenhaCirculo (x, y){
+
+		pincel.fillStyle = 'blue'
+		pincel.beginPath()
+		pincel.arc(x,y,10,0,2*Math.PI)
+		pincel.fill()
+	}
+
+	function limpaTela(){
+
+		pincel.clearRect(0,0,1200,800)
+	}
+
+	function atualizaTela(){
+
+		limpaTela()
+		desenhaCirculo(x, y)
+		mover()
+	}
+
+	setInterval(atualizaTela, 1)
+
+	function mover(){
+
+		document.onkeydown = function(evento){
+
+			if(evento.keyCode == esquerdaCod)esquerda = true;
+			if(evento.keyCode == direitaCod)direita = true;
+			if(evento.keyCode == cimaCod)cima = true;
+			if(evento.keyCode == baixoCod)baixo = true;
+			
+		}
+		document.onkeyup = function(evento){
+
+			if(evento.keyCode == esquerdaCod)esquerda = false;
+			if(evento.keyCode == direitaCod)direita = false;
+			if(evento.keyCode == cimaCod)cima = false;
+			if(evento.keyCode == baixoCod)baixo = false;
+
+		}
+
+		if(esquerda){
+			x = x - taxa
+		}
+		if(cima){
+			y = y - taxa
+		}
+		if(direita){
+			x = x + taxa
+		}
+		if(baixo){
+			y = y + taxa
+		}	
+	}
+</script>

@@ -1,0 +1,67 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="gasolina.css">
+
+<h2 id="titulo">Álcool ou gasolina?</h2>
+<h3 id="subtitulo">Compare os preços e avalie se vale mais a pena abastecer o seu veículo com gasolina ou álcool.</h3>
+
+<div id="campos">
+	<input id="gasolina" name="gasolina" placeholder="preço da gasolina"></input> <input id="alcool" name="alcool"
+		placeholder="preço do álcool"></input>
+	<br><br>
+	<button id="botao" name="botao">Compare</button>
+	<br>
+	<p id="resultado"></p>
+</div>
+<br>
+Me siga no <a href="https://twitter.com/dedezaumm" target="_blank">Twitter</a>
+
+<script>
+
+	function pulaLinha() {
+
+		document.write("<br><br>")
+	}
+
+	function comparaçao() {
+
+		var economia = alcool.value / gasolina.value
+
+		if (economia <= 0.7 && gasolina.value !== "" && alcool.value !== "") {
+			document.querySelector('#resultado').innerHTML = "Com a gasolina custando R$ " + gasolina.value + " e o álcool custando R$ " + alcool.value + ", vale mais a pena você abastecer com <b>álcool</b>."
+		}
+
+		else if (economia > 0.7 && gasolina.value !== "" && alcool.value !== "") {
+			document.querySelector('#resultado').innerHTML = "Com a gasolina custando R$ " + gasolina.value + " e o álcool custando R$ " + alcool.value + " , vale mais a pena você abastecer com <b>gasolina</b>."
+		}
+		else if (gasolina.value == "" || alcool.value == "") {
+			alert("Por favor, preencha os campos.")
+		}
+		alert(economia)
+		alcool.value = ""
+		gasolina.value = ""
+		gasolina.focus()
+	}
+
+
+	var preçoGasolina = parseFloat(document.querySelector("#gasolina"))
+	gasolina.focus()
+
+	var preçoAlcool = parseFloat(document.querySelector("#alcool"))
+
+
+	var botao = document.querySelector("#botao")
+
+	//botao.onclick = comparaçao(preçoGasolina, preçoAlcool)
+	botao.onclick = comparaçao
+
+
+
+
+	 //var precoGasolina = parseFloat(prompt("Qual o preço do litro da gasolina?"))
+	 //var precoAlcool = parseFloat(prompt("Qual o preço do litro do alcool?"))
+
+	 //var economia = comparaçao(precoGasolina, precoAlcool)
+
+
+
+</script>

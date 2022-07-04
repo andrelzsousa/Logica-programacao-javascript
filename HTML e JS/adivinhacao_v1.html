@@ -1,0 +1,66 @@
+<meta charset="utf-8">
+
+<script>
+	
+	function pulaLinha() {
+
+		document.write("<br>")
+	}
+
+	function mostrar(frase) {
+
+		document.write(frase)
+		pulaLinha()
+	}
+
+
+	function sorteia(n){
+
+		var sorteio = Math.round(Math.random() * n)
+
+		return sorteio
+	}
+
+	var perguntaN = parseInt(prompt("Vamos jogar! Digite um número de no máximo 3 digitos"))
+
+	var numeroSorteado = sorteia(perguntaN)
+	console.log(numeroSorteado)
+
+	var vidas = 3
+
+	while(vidas>0){
+
+		//alert("Você tem " + vidas + " chance para adivinhar um número entre 0 e " + perguntaN + ".")
+
+		var chute = parseInt(prompt("Você tem " + vidas + " chances para adivinhar um número entre 0 e " + perguntaN + ". Qual o seu chute?"))
+
+		if (chute>perguntaN){
+			alert("Chute um múmero entre 0 e " + perguntaN + ".")
+		}
+
+		if (chute == numeroSorteado){
+		alert("MEU DEUS, VOCÊ ACERTOU!")
+		break
+		} 
+		
+		else if (chute < numeroSorteado) {
+		alert("Você errou. O número é maior");
+		vidas = vidas - 1
+
+		} 
+
+		else if (chute > numeroSorteado && chute < perguntaN) {
+		alert("Você errou. O número é menor")
+		vidas = vidas - 1
+		}
+
+		if (vidas == 0){
+		alert("Fim do jogo. O número era " + numeroSorteado)
+		break
+
+	}
+
+	
+	}
+
+</script>

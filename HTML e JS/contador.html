@@ -1,0 +1,69 @@
+<p id="mostrador"></p>
+
+<button id="menos10">-10</button>
+<button id="menos">-</button>
+<button id="clear">C</button>
+<button id="mais">+</button>
+<button id="mais10">+10</button>
+<br>
+<p id="gay"></p>
+
+<script>
+
+  var botaoMenos10 = document.querySelector('#menos10')
+  var botaoMenos = document.querySelector('#menos')
+  var botaoClear = document.querySelector('#clear')
+  var botaoMais = document.querySelector('#mais')
+  var botaoMais10 = document.querySelector('#mais10')
+  
+  var numero = 0
+
+  function escreve(){
+
+    document.querySelector('#mostrador').innerHTML = "________." + numero + ".________"
+
+    if (numero == 69){
+      document.querySelector('#gay').innerHTML = 'tchotcha'
+    }else {
+      document.querySelector('#gay').innerHTML = ''
+    }
+  }
+
+  escreve()
+
+  function somar() {
+
+    numero++
+    escreve()  
+  }
+
+  function somarDez() {
+
+    numero = numero + 10
+    escreve()  
+  }
+  
+  function subtrair() {
+
+    numero--
+    escreve() 
+  }
+
+  function subtrairDez() {
+
+    numero = numero - 10
+    escreve() 
+  }
+
+  function clear(){
+
+   numero = 0
+   escreve() 
+  }
+
+  botaoMais.onclick = somar
+  botaoMais10.onclick = somarDez
+  botaoMenos.onclick = subtrair
+  botaoMenos10.onclick = subtrairDez
+  botaoClear.onclick = clear
+</script>

@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+
+<h2>Adivinhe meu segredo</h2>
+<input placeholder="Digite seu chute" id="caixa" name="caixa">
+<button id="botao" name="botao">COMPARE</button>
+<p id="resul"></p>
+
+
+<script>
+
+	document.querySelector("#caixa")
+	caixa.focus()
+
+	var segredos = [Math.round(Math.random() * 10), Math.round(Math.random() * 10), Math.round(Math.random() * 10)]
+	console.log(segredos)
+
+
+	function verificacao() {
+
+		var acertou = false
+
+		for (i = 0; i < segredos.length; i++) {
+
+			if (caixa.value == segredos[i]) {
+				alert("Você acertou!");
+				acertou = true
+				break
+			}
+
+		}
+
+		if (acertou == false) {
+			alert("Você errou!")
+			caixa.value = ""
+			caixa.focus()
+		}
+
+	}
+
+
+	document.querySelector("#botao")
+	botao.onclick = verificacao
+</script>

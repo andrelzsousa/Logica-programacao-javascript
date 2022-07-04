@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+
+<h2>Jogo do alfabeto</h2>
+<p id="pergunta"></p>
+
+<input id="caixa"></input>
+<button id="botao">Verifica</button>
+
+
+<script>
+	var letras = ['zero', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+	var caixa = document.querySelector("#caixa")
+	caixa.focus()
+
+	var botao = document.querySelector("#botao")
+	botao.onclick = verificar
+
+	var posicaoLetra = Math.round(Math.random() * 26)
+
+	//while(posicaoLetra==0){
+
+		//posicaoLetra = Math.round(Math.random() * 26)
+
+	//}
+ var posicaoLetra = Math.round((Math.random() * 25) + 1)
+	
+	function verificar(){
+
+
+		if(caixa.value==letras[posicaoLetra]){
+			alert("voce acertou parabens bro")
+		}
+		else{alert("Não foi dessa vez! A " + posicaoLetra + "ª letra do alfabeto é " + letras[posicaoLetra])}
+
+	}
+	
+	
+
+
+
+
+
+	document.querySelector('#pergunta').innerHTML = "Qual a " + posicaoLetra + "ª letra do alfabeto?" 
+
+
+
+</script>

@@ -1,0 +1,120 @@
+<canvas width="720" height="480" style=" position: relative; left: 26%; top: 12%;"></canvas>
+
+<br>
+<p id='acertos'><b>acertos:</b> </p>
+
+<p id='erros'><b>erros:</b> </p>
+<p>(com 5 erros o jogo acaba)</p>
+<br>
+<p>Dificuldade:</p>
+
+<button id='botaoFacil'>Fácil</button>
+<button id='botaoMedio'>Médio</button>
+<button id='botaoDificil'>Difícil</button>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+
+    pincel.fillStyle = 'white';
+    pincel.fillRect(0, 0, 720, 480);
+
+    var botaoFacil = document.querySelector("#botaoFacil")
+    var botaoMedio = document.querySelector("#botaoMedio")
+    var botaoDificil = document.querySelector("#botaoDificil")
+
+    var dificuldade = 1000
+
+    function limpaTela() {
+        
+        pincel.fillStyle = 'lightgrey'
+        pincel.fillRect(0, 0, 720, 480)
+    }
+
+    var raio = 15
+    var xAlvo;
+    var yALvo
+
+    function desenhaCirculo() {
+
+        limpaTela()
+
+        xAlvo = Math.random() * (720 - (2 * raio))
+        yALvo = Math.random() * (480 - (2 * raio))
+
+        pincel.fillStyle = 'blue'
+        pincel.beginPath()
+        pincel.arc(xAlvo, yALvo, raio, 0, 2 * Math.PI)
+        pincel.fill()
+    }   
+
+    var intervalo = setInterval(desenhaCirculo, dificuldade)
+
+    var acertos = 1
+    var erros = 1
+
+    var tamanhoRaio = true
+
+    function disparo(evento){
+
+        var x = evento.pageX - tela.offsetLeft  
+        var y = evento.pageY - tela.offsetTop
+
+        if(raio<7){
+            tamanhoRaio = false
+        }
+
+        if((x>xAlvo - raio) &&
+         (x<xAlvo + raio) &&
+          (y> yALvo - raio) &&
+           (y< yALvo + raio)) {
+            
+            document.querySelector('#acertos').innerHTML = '<b>acertos:</b> ' + acertos
+
+            acertos = acertos + 1
+            
+            if (tamanhoRaio){
+                raio = raio -1}
+        }
+
+        else {
+            document.querySelector('#erros').innerHTML = '<b>erros:</b> ' + erros
+
+            erros = erros + 1
+            raio = raio + 2
+        }
+
+
+        if(erros==6){
+
+            clearInterval( intervalo )
+            limpaTela()
+            setTimeout(fim, 100)
+
+        }
+    }
+
+    function fim(){
+        alert('Você errou 5 vezes! Fim de jogo.')
+    }
+
+    tela.onclick = disparo
+
+
+    botaoFacil.onclick = function(){
+
+        dificuldade = 1400
+    }
+
+    botaoMedio.onclick = function(){
+
+        dificuldade = 1000
+    }
+
+    botaoDificil.onclick = function(){
+
+        dificuldade = 700
+    }
+
+</script>

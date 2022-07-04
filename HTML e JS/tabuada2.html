@@ -1,0 +1,20 @@
+<meta charset="utf-8">
+
+<script>
+    function tabuada(numero, limite) {
+
+        var multiplicador = 1
+        while (multiplicador <= limite && limite <= 999) {
+
+            document.write(numero + ' x ' + multiplicador + ' = ' + (numero * multiplicador) + '<br>')
+            multiplicador++
+        }
+    }
+
+    var limite = parseInt(prompt('ate qual numero'))
+    var numero = parseInt(prompt('Qual tabuada você deseja conhecer?'))
+
+    tabuada(numero, limite)
+
+
+</script>

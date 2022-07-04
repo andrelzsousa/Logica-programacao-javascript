@@ -1,0 +1,53 @@
+<progress value="0" max="105" id="barra" style="background-color:lightgrey;"></progress>
+<br>
+<button id="esquerda">Soco Esquerdo</button> <button id="direita">Soco Direito</button>
+
+<script>
+var barra1 = document.querySelector("#barra")
+var botaoEsquerdo = document.querySelector("#esquerda")
+var botaoDireito = document.querySelector("#direita")
+
+function barra(){
+
+    var intervalo
+    barra1.value = 100
+    tempo()
+
+    function tempo(){
+        intervalo = setInterval(somar, 100)
+    }
+
+    function somar(){
+        
+        barra1.value = barra1.value - 1.5
+        
+        if(barra1.value <= 0){
+            alert('perdeu')
+            clearInterval(intervalo)       
+        }
+
+        if (barra1.value > 101){
+            alert('venceu')
+            clearInterval(intervalo)
+        }
+    }
+}
+
+function esquerda(){
+
+    barra1.value = barra1.value + 6
+    botaoEsquerdo.disabled = true
+    botaoDireito.disabled = false
+}
+
+function direita(){
+
+barra1.value = barra1.value + 6
+botaoDireito.disabled = true
+botaoEsquerdo.disabled = false
+}
+
+barra()
+botaoEsquerdo.onclick = esquerda
+botaoDireito.onclick = direita
+</script>
